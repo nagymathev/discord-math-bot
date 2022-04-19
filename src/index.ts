@@ -2,7 +2,8 @@ import { REST } from "@discordjs/rest"
 import { Routes } from "discord-api-types/v9"
 import { Client, Intents, Message, Typing } from "discord.js"
 import { config } from "dotenv"
-config()
+// config()
+console.log(process.env.TOKEN)
 
 console.log("HELLO MUWM")
 
@@ -32,7 +33,10 @@ client.on("messageCreate",async (msg:Message<boolean>) => {
     const text = content.slice(1)
     const text_cmd = text.split(" ")
     if (text_cmd[0] == "pi") {
-        const digits = parseInt(text_cmd[1])
+        let digits = 1000
+        if (text_cmd.length > 1) {
+            digits = parseInt(text_cmd[1])
+        }
         const reply = `${process.env.PI!.slice(0, digits + 1)}`
         if (reply.length < 2000) {
             if (reply.length <= 0) {
